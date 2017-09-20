@@ -1,5 +1,9 @@
 {
   "expo": {
-    "sdkVersion": "20.0.0"
+    "name": "Positive Head",
+    "slug": "phead",
+    "sdkVersion": "20.0.0",
+    "privacy": "unlisted",
+    "icon": "assets/phead-icon.jpeg"
   }
 }
