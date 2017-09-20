@@ -1,13 +1,20 @@
 // @flow
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import firebase from 'firebase';
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import * as firebase from 'firebase';
+
+import store from './store';
+import AuthScreen from './screens/AuthScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+import UserProfileScreen from './screens/UserProfileScreen';
 
 export default class App extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     // Initialize Firebase
-    var config = {
+    const config = {
       apiKey: "AIzaSyDIP0UGGNRqFP946TWk3CcfWtwKO7Yyn_s",
       authDomain: "positive-head.firebaseapp.com",
       databaseURL: "https://positive-head.firebaseio.com",
@@ -15,16 +22,46 @@ export default class App extends React.Component {
       storageBucket: "positive-head.appspot.com",
       messagingSenderId: "770866405055"
     };
+    debugger;
     firebase.initializeApp(config);
+
+    // Listen for authentication state to change.
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        console.log('firebase is authenticated now!');
+
+      }
+      // Do other things
+    });
+
   }
 
   render() {
+
+    const MainNavigator = TabNavigator({
+      welcome: { screen: WelcomeScreen },
+      auth: { screen: AuthScreen },
+      main: {
+        screen: TabNavigator({
+          "user-profile": { screen: UserProfileScreen },
+        }, {
+          tabBarPosition: 'bottom',
+          tabBarOptions: {
+            labelStyle: { fontSize: 12 }
+          }
+        })
+      }
+    }, {
+      navigationOptions: {
+        // tabBar: { visible: false }
+      },
+      lazyLoad: true
+    });
+
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={store}>
+        <MainNavigator />
+      </Provider>
     );
   }
 }
