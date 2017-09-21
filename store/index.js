@@ -4,14 +4,15 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
 import reducers from '../reducers';
 
-const store = createStore(
-  reducers,
-  {},
-  compose(
-    applyMiddleware(thunk),
-    autoRehydrate()
-  )
-);
+const middleware = applyMiddleware(thunk); //pick your middleware flavors here
+
+const store = ( undefined === window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ?
+  createStore( reducers, compose(middleware, autoRehydrate()) ) :
+  createStore(reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+      middleware, autoRehydrate()
+    )
+  );
 
 persistStore(store, { storage: AsyncStorage, whitelist: ['likedJobs'] });
 
