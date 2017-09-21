@@ -118,11 +118,20 @@ REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname' npm start
 
 Windows:
 ```
-set REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname'
+setx REACT_NATIVE_PACKAGER_HOSTNAME my-custom-ip-address-or-hostname /M
 npm start
 ```
 
 The above example would cause the development server to listen on `exp://my-custom-ip-address-or-hostname:19000`.
+
+## Debugging Remote JS
+
+https://docs.expo.io/versions/latest/guides/debugging.html
+1. In XDE, click the gear icon. Set host to LAN (or localhost... see above link), Protocol to exp, and check Development Mode
+2.a. Using your device (on same WIFI), shake to show developer menu, 'Start Remote JS Debugging'
+2.b. Using Genymotion, once app is started click Genymotion menu, 'Start Remote JS Debugging'
+3. This opens a chrome tab on desktop with instructions to use the chrome console/debugging tools. Stop on exceptions, and place debugger statements / breakpoints in code where necessary.
+4. TBD find out how to clear device local storage (to debug authentication flow, for example)
 
 ## Adding Flow
 
