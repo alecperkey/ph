@@ -2,14 +2,11 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
-import { TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import * as firebase from 'firebase';
 
 import store from './store';
-import AuthScreen from './screens/AuthScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
-import UserProfileScreen from './screens/UserProfileScreen';
+import AppWithNavigationState from './navigators/AppNavigator';
 
 export default class App extends React.Component {
   componentWillMount() {
@@ -22,7 +19,7 @@ export default class App extends React.Component {
       storageBucket: "positive-head.appspot.com",
       messagingSenderId: "770866405055"
     };
-    debugger;
+    // debugger;
     firebase.initializeApp(config);
 
     // Listen for authentication state to change.
@@ -38,29 +35,9 @@ export default class App extends React.Component {
 
   render() {
 
-    const MainNavigator = TabNavigator({
-      welcome: { screen: WelcomeScreen },
-      auth: { screen: AuthScreen },
-      main: {
-        screen: TabNavigator({
-          "user-profile": { screen: UserProfileScreen },
-        }, {
-          tabBarPosition: 'bottom',
-          tabBarOptions: {
-            labelStyle: { fontSize: 12 }
-          }
-        })
-      }
-    }, {
-      navigationOptions: {
-        // tabBar: { visible: false }
-      },
-      lazyLoad: true
-    });
-
     return (
       <Provider store={store}>
-        <MainNavigator />
+        <AppWithNavigationState />
       </Provider>
     );
   }

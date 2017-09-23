@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 class UserProfileScreen extends Component {
 
   render() {
+    debugger;
     return (
       <View style={{ marginTop: 10 }}>
         <Text>User Profile Screen</Text>

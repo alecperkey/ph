@@ -12,6 +12,7 @@ import {
 // AsyncStorage.getItem('fb_token');
 
 export const facebookLogin = () => async dispatch => {
+  debugger;
   let token = await AsyncStorage.getItem('fb_token');
 
   if (token) {
