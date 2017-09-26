@@ -17,7 +17,6 @@ class UserProfileScreen extends Component {
   }
 
   render() {
-    debugger;
     const {token, isLoggedIn} = { ...this.props };
     return (
       <View>

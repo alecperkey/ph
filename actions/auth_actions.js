@@ -53,7 +53,6 @@ const doFacebookLoginWithFirebase = async dispatch => {
     permissions: ['public_profile']
   });
 
-  debugger;
   console.log({type,token});
 
   if (type === 'success') {

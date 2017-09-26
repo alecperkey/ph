@@ -5,7 +5,7 @@ import { View, Text, Button, AsyncStorage } from 'react-native';
 import { AppLoading } from 'expo';
 import { connect } from 'react-redux';
 
-import {facebookLogin} from '../actions';
+// import {facebookLogin} from '../actions';
 import * as actions from '../actions';
 import LoginStatusMessage from '../components/LoginStatusMessage';
 import AuthButton from '../components/AuthButton';
@@ -17,7 +17,7 @@ class LoginScreen extends Component {
     let token = await AsyncStorage.getItem('fb_token');
 
     if (token) {
-      this.props.navigation.dispatch({ type: 'Profile' });
+      this.props.navigation.dispatch({ type: 'Main' });
       this.setState({ token });
     } else {
       this.setState({ token: false });
@@ -26,12 +26,11 @@ class LoginScreen extends Component {
 
   attemptFacebookLogin = () => {
     this.props.facebookLogin();
-    // this.onAuthComplete(props);
-  }
+  };
 
   attemptFacebookLogout = () => {
     this.props.facebookLogout();
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     this.onAuthComplete(nextProps);
@@ -40,34 +39,31 @@ class LoginScreen extends Component {
   onAuthComplete(props) {
     // facebook auth successful, exit Login to Onboarding or Main
     if (props.token) {
-      this.props.navigation.navigate('Profile');
+      this.props.navigation.dispatch({type: 'Main'});
     }
   }
 
-  exampleManualNavigationButton = (navigation) =>
-    <Button
-      onPress={() => navigation.dispatch({ type: 'Login' })}
-      title="Dispatch navigation to Login"
-    />;
+  // exampleManualNavigationButton = (navigation) =>
+  //   <Button
+  //     onPress={() => navigation.dispatch({ type: 'Login' })}
+  //     title="Dispatch navigation to Login"
+  //   />;
 
   render() {
-    debugger;
     if (_.isNull(this.state.token)) {
       return <AppLoading />;
     }
 
-    const navigation = this.props.navigation;
-    const {logout, isLoggedIn} = { ...this.props };
+    // const navigation = this.props.navigation;
+    const {isLoggedIn} = { ...this.props };
 
     return (
       <View>
         <Text>Login Screen</Text>
-
         <LoginStatusMessage
           isLoggedIn={isLoggedIn}
           logout={this.attemptFacebookLogout}
         />
-
         <AuthButton
           continueWithFacebook={this.attemptFacebookLogin}
           isLoggedIn={isLoggedIn}
@@ -94,9 +90,8 @@ const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn
 });
 
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch({ type: 'Logout' }),
-  facebookLogin: facebookLogin
-});
+// const mapDispatchToProps = dispatch => ({
+//   logout: () => dispatch({ type: 'Logout' }),
+// });
 
 export default connect(mapStateToProps, actions)(LoginScreen);

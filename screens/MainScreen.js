@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import LoginStatusMessage from '../components/LoginStatusMessage';
-import AuthButton from '../components/AuthButton';
 
 class MainScreen extends Component {
   componentDidMount() {
@@ -13,13 +12,16 @@ class MainScreen extends Component {
   componentWillReceiveProps(nextProps) {
   }
 
-
   render() {
-    debugger;
+    const {isLoggedIn} = { ...this.props };
+
     return (
       <View>
         <Text>Main Screen</Text>
-        <LoginStatusMessage />
+        <LoginStatusMessage
+          isLoggedIn={isLoggedIn}
+          logout={this.attemptFacebookLogout}
+        />
       </View>
     );
   }
@@ -33,8 +35,8 @@ MainScreen.navigationOptions = {
   title: 'Main Screen',
 };
 
-function mapStateToProps({ auth }) {
-  return { token: auth.token };
-}
-
+const mapStateToProps = state => ({
+  token: state.auth.token,
+  isLoggedIn: state.auth.isLoggedIn
+});
 export default connect(mapStateToProps, actions)(MainScreen);

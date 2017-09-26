@@ -6,7 +6,6 @@ class AuthButton extends Component {
 
   render(){
     const {logout, isLoggedIn, continueWithFacebook} = { ...this.props };
-    debugger;
     return (
       <Button
         title={isLoggedIn ? 'Log Out' : 'Continue with Facebook'}
@@ -15,14 +14,6 @@ class AuthButton extends Component {
         buttonStyle={styles.buttonStyle}
       />
     );
-    // return (
-    //   <Button
-    //     title="Continue With Facebook!"
-    //     raised
-    //     buttonStyle={styles.buttonStyle}
-    //     onPress={this.props.continueWithFacebook}
-    //   />
-    // );
   }
 }
 
