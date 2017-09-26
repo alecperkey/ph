@@ -8,27 +8,18 @@ import AuthButton from '../components/AuthButton';
 
 class MainScreen extends Component {
   componentDidMount() {
-    // this.props.facebookLogin();
-    // this.onAuthComplete(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.onAuthComplete(nextProps);
   }
 
-  onAuthComplete(props) {
-    // if (props.token) {
-    //   this.props.navigation.navigate('Profile');
-    // }
-  }
 
   render() {
-    // debugger;
+    debugger;
     return (
       <View>
         <Text>Main Screen</Text>
         <LoginStatusMessage />
-        <AuthButton />
       </View>
     );
   }

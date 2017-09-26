@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-native';
+import { Button } from 'react-native-elements';
 
 class AuthButton extends Component {
 
@@ -13,8 +13,23 @@ class AuthButton extends Component {
         onPress={isLoggedIn ? logout : continueWithFacebook}
       />
     );
+    // return (
+    //   <Button
+    //     title="Continue With Facebook!"
+    //     raised
+    //     buttonStyle={styles.buttonStyle}
+    //     onPress={this.props.continueWithFacebook}
+    //   />
+    // );
   }
 }
+
+const styles = {
+  buttonStyle: {
+    backgroundColor: '#0288D1',
+    marginTop: 15
+  }
+};
 
 AuthButton.propTypes = {
   isLoggedIn: PropTypes.bool,

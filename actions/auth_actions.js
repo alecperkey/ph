@@ -12,7 +12,6 @@ import {
 // AsyncStorage.getItem('fb_token');
 
 export const facebookLogin = () => async dispatch => {
-  debugger;
   let token = await AsyncStorage.getItem('fb_token');
 
   if (token) {
@@ -42,8 +41,12 @@ const doFacebookLoginWithFirebase = async dispatch => {
     permissions: ['public_profile']
   });
 
+  debugger;
+  console.log({type,token});
+
   if (type === 'success') {
     // Build Firebase credential with the Facebook access token.
+    console.log('doFacebookLoginWithFirebase type success');
     const credential = firebase.auth.FacebookAuthProvider.credential(token);
 
     // Sign in with credential from the Facebook user.
@@ -52,9 +55,11 @@ const doFacebookLoginWithFirebase = async dispatch => {
     });
   }
   if (type === 'cancel') {
+    console.log('doFacebookLoginWithFirebase type cancel');
     return dispatch({ type: FACEBOOK_LOGIN_FAIL });
   }
 
   await AsyncStorage.setItem('fb_token', token);
+  console.log('dispatch FACEBOOK_LOGIN_SUCCESS, token: ', token);
   dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
 };

@@ -5,7 +5,8 @@ import { View, Text, Button, AsyncStorage } from 'react-native';
 import { AppLoading } from 'expo';
 import { connect } from 'react-redux';
 
-import {facebookLogin} from '../actions';
+// import {facebookLogin} from '../actions';
+import * as actions from '../actions';
 import LoginStatusMessage from '../components/LoginStatusMessage';
 import AuthButton from '../components/AuthButton';
 
@@ -24,13 +25,11 @@ class LoginScreen extends Component {
   }
 
   attemptFacebookLogin = () => {
-    debugger;
     this.props.facebookLogin();
     // this.onAuthComplete(props);
-  };
+  }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     this.onAuthComplete(nextProps);
   }
 
@@ -41,6 +40,12 @@ class LoginScreen extends Component {
     }
   }
 
+  exampleManualNavigationButton = (navigation) =>
+    <Button
+      onPress={() => navigation.dispatch({ type: 'Login' })}
+      title="Dispatch navigation to Login"
+    />;
+
   render() {
     if (_.isNull(this.state.token)) {
       return <AppLoading />;
@@ -49,17 +54,14 @@ class LoginScreen extends Component {
     const navigation = this.props.navigation;
     const {logout, isLoggedIn} = { ...this.props };
 
-    debugger;
-
     return (
       <View>
         <Text>Login Screen</Text>
-        <Button
-          onPress={() => navigation.dispatch({ type: 'Login' })}
-          title="Dispatch navigation to Login"
+
+        <LoginStatusMessage
+          isLoggedIn={isLoggedIn}
         />
 
-        <LoginStatusMessage />
         <AuthButton
           continueWithFacebook={this.attemptFacebookLogin}
           isLoggedIn={isLoggedIn}
@@ -75,19 +77,19 @@ LoginScreen.navigationOptions = {
 };
 
 LoginScreen.propTypes = {
-  isLoggedIn: PropTypes.bool,
+  auth: PropTypes.object,
   logout: PropTypes.func,
   navigation: PropTypes.object,
   token: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn,
+  auth: state.auth,
+  isLoggedIn: state.auth.isLoggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch({ type: 'Logout' }),
-  facebookLogin
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, actions)(LoginScreen);

@@ -16,7 +16,6 @@ const RouteConfigs = {
 const StackNavigatorConfig = {
   initialRouteName: 'Login',
   headerMode: 'screen',
-
 };
 
 export const AppNavigator = StackNavigator(RouteConfigs, StackNavigatorConfig);
