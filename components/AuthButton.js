@@ -11,6 +11,8 @@ class AuthButton extends Component {
       <Button
         title={isLoggedIn ? 'Log Out' : 'Continue with Facebook'}
         onPress={isLoggedIn ? logout : continueWithFacebook}
+        raised
+        buttonStyle={styles.buttonStyle}
       />
     );
     // return (

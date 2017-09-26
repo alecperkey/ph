@@ -4,12 +4,24 @@ import * as firebase from 'firebase';
 
 import {
   FACEBOOK_LOGIN_SUCCESS,
-  FACEBOOK_LOGIN_FAIL
+  FACEBOOK_LOGIN_FAIL,
+  FACEBOOK_LOGOUT
 } from './types';
 
 // How to use AsyncStorage:
 // AsyncStorage.setItem('fb_token', token);
 // AsyncStorage.getItem('fb_token');
+
+export const facebookLogout = () => async dispatch => {
+  let token = await AsyncStorage.removeItem('fb_token');
+
+  if (token) {
+    console.log('ERR: token not removed', token);
+  } else {
+    // Dispatch an action to clear token from redux state also
+    dispatch({ type: FACEBOOK_LOGOUT, payload: null});
+  }
+};
 
 export const facebookLogin = () => async dispatch => {
   let token = await AsyncStorage.getItem('fb_token');

@@ -5,7 +5,7 @@ import { View, Text, Button, AsyncStorage } from 'react-native';
 import { AppLoading } from 'expo';
 import { connect } from 'react-redux';
 
-// import {facebookLogin} from '../actions';
+import {facebookLogin} from '../actions';
 import * as actions from '../actions';
 import LoginStatusMessage from '../components/LoginStatusMessage';
 import AuthButton from '../components/AuthButton';
@@ -29,6 +29,10 @@ class LoginScreen extends Component {
     // this.onAuthComplete(props);
   }
 
+  attemptFacebookLogout = () => {
+    this.props.facebookLogout();
+  }
+
   componentWillReceiveProps(nextProps) {
     this.onAuthComplete(nextProps);
   }
@@ -47,6 +51,7 @@ class LoginScreen extends Component {
     />;
 
   render() {
+    debugger;
     if (_.isNull(this.state.token)) {
       return <AppLoading />;
     }
@@ -60,12 +65,13 @@ class LoginScreen extends Component {
 
         <LoginStatusMessage
           isLoggedIn={isLoggedIn}
+          logout={this.attemptFacebookLogout}
         />
 
         <AuthButton
           continueWithFacebook={this.attemptFacebookLogin}
           isLoggedIn={isLoggedIn}
-          logout={logout}
+          logout={this.attemptFacebookLogout}
         />
       </View>
     );
@@ -90,6 +96,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch({ type: 'Logout' }),
+  facebookLogin: facebookLogin
 });
 
 export default connect(mapStateToProps, actions)(LoginScreen);

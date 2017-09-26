@@ -1,6 +1,9 @@
 import { NavigationActions } from 'react-navigation';
-
 import { AppNavigator } from '../navigators/AppNavigator';
+
+import {
+  FACEBOOK_LOGOUT
+} from '../actions/types';
 
 // Start with two routes: The Login screen, with the Main screen on top.
 const firstAction = AppNavigator.router.getActionForPathAndParams('Login');
@@ -21,7 +24,7 @@ export default function nav(state = initialNavState, action) {
         state
       );
       break;
-    case 'Logout':
+    case FACEBOOK_LOGOUT:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'Login' }),
         state
