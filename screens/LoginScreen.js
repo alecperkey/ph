@@ -11,16 +11,18 @@ import LoginStatusMessage from '../components/LoginStatusMessage';
 import AuthButton from '../components/AuthButton';
 
 class LoginScreen extends Component {
-  state = { token: null };
+  // state = { token: null };
 
   async componentWillMount() {
-    let token = await AsyncStorage.getItem('fb_token');
+    console.log('will mount');
+    // let token = await AsyncStorage.getItem('fb_token');
+    let token = this.props.token || false;
 
     if (token) {
-      this.props.navigation.dispatch({ type: 'Main' });
-      this.setState({ token });
+      // this.props.navigation.dispatch({ type: 'Main' });
+      // this.setState({ token });
     } else {
-      this.setState({ token: false });
+      // this.setState({ token: false });
     }
   }
 
@@ -38,8 +40,9 @@ class LoginScreen extends Component {
 
   onAuthComplete(props) {
     // facebook auth successful, exit Login to Onboarding or Main
+    console.log('onAuthComplete', !!props.token);
     if (props.token) {
-      this.props.navigation.dispatch({type: 'Main'});
+      // this.props.navigation.dispatch({type: 'Main'});
     }
   }
 
@@ -50,9 +53,11 @@ class LoginScreen extends Component {
   //   />;
 
   render() {
-    if (_.isNull(this.state.token)) {
-      return <AppLoading />;
-    }
+    // token not available till rehydration
+    // TBD show AppLoading while rehydrating -- how to know?
+    // if (_.isNull(this.props.token) && false) {
+    //   return <AppLoading />;
+    // }
 
     // const navigation = this.props.navigation;
     const {isLoggedIn} = { ...this.props };
@@ -87,6 +92,7 @@ LoginScreen.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  token: state.auth.token,
   isLoggedIn: state.auth.isLoggedIn
 });
 

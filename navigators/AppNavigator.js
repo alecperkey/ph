@@ -14,7 +14,6 @@ const RouteConfigs = {
 };
 
 const StackNavigatorConfig = {
-  initialRouteName: 'Login',
   headerMode: 'screen',
 };
 

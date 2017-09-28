@@ -14,6 +14,6 @@ const store = ( undefined === window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ?
     )
   );
 
-persistStore(store, { storage: AsyncStorage, whitelist: ['likedJobs'] });
+persistStore(store, { storage: AsyncStorage, whitelist: ['auth', 'nav'] });
 
 export default store;

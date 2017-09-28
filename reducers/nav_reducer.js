@@ -14,7 +14,6 @@ const initialNavState = AppNavigator.router.getStateForAction(
   secondAction,
   tempNavState
 );
-
 export default function nav(state = initialNavState, action) {
   let nextState;
   console.log(action.type);
@@ -28,6 +27,12 @@ export default function nav(state = initialNavState, action) {
     case 'Profile':
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'Profile' }),
+        state
+      );
+      break;
+    case 'Main':
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'Main' }),
         state
       );
       break;
