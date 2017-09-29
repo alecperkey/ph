@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { persistStore, autoRehydrate } from 'redux-persist';
+import { autoRehydrate } from 'redux-persist-immutable';
 import { AsyncStorage } from 'react-native';
 import reducers from '../reducers';
 
@@ -14,6 +14,6 @@ const store = ( undefined === window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ?
     )
   );
 
-persistStore(store, { storage: AsyncStorage, whitelist: ['auth', 'nav'] });
+// persistStore(store, { storage: AsyncStorage, whitelist: ['auth', 'nav'] });
 
 export default store;

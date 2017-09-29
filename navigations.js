@@ -32,7 +32,7 @@ import ProfileScreen from './screens/UserProfileScreen';
 // import AddButtonTab from './components/AddButtonTab';
 // import BackButton from './components/commons/BackButton';
 // import ButtonSearch from './components/ButtonSearch';
-// import HighLightTab from './components/HighLightTab';
+import HighLightTab from './components/HighLightTab';
 // ------------------------------------
 // UTILS
 // ------------------------------------
