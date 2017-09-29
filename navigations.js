@@ -132,45 +132,45 @@ type NavProps = {
 //   }
 // )
 
-const HomeNavigator = StackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-      navigationOptions: (props: NavProps) => ({
-        headerTitle: 'KeepMyFolio',
-        headerTitleStyle: {
-          color: props.screenProps.theme.headerTitleColor,
-        },
-        headerStyle: {
-          backgroundColor: props.screenProps.theme.tabBarColor,
-        },
-        headerRight: <ButtonSearch />,
-      }),
-    },
-    CoinDetailsScreen: {
-      screen: CoinDetailsNavigator,
-      navigationOptions: (props: NavProps) => ({
-        headerTitle: props.navigation.state.params.name,
-        headerBackTitle: null,
-        headerTitleStyle: {
-          color: props.screenProps.theme.headerTitleColor,
-        },
-        headerStyle: {
-          backgroundColor: props.screenProps.theme.tabBarColor,
-        },
-        headerLeft: <BackButton goBack={props.navigation.goBack} />,
-      }),
-    },
-  },
-  {
-    headerMode: 'screen',
-    cardStyle: {
-      backgroundColor: '#161C36',
-      // backgroundColor: 'transparent',
-      // shadowColor: 'transparent'
-    },
-  },
-);
+// const HomeNavigator = StackNavigator(
+//   {
+//     Home: {
+//       screen: HomeScreen,
+//       navigationOptions: (props: NavProps) => ({
+//         headerTitle: 'KeepMyFolio',
+//         headerTitleStyle: {
+//           color: props.screenProps.theme.headerTitleColor,
+//         },
+//         headerStyle: {
+//           backgroundColor: props.screenProps.theme.tabBarColor,
+//         },
+//         headerRight: <ButtonSearch />,
+//       }),
+//     },
+//     CoinDetailsScreen: {
+//       screen: CoinDetailsNavigator,
+//       navigationOptions: (props: NavProps) => ({
+//         headerTitle: props.navigation.state.params.name,
+//         headerBackTitle: null,
+//         headerTitleStyle: {
+//           color: props.screenProps.theme.headerTitleColor,
+//         },
+//         headerStyle: {
+//           backgroundColor: props.screenProps.theme.tabBarColor,
+//         },
+//         headerLeft: <BackButton goBack={props.navigation.goBack} />,
+//       }),
+//     },
+//   },
+//   {
+//     headerMode: 'screen',
+//     cardStyle: {
+//       backgroundColor: '#161C36',
+//       // backgroundColor: 'transparent',
+//       // shadowColor: 'transparent'
+//     },
+//   },
+// );
 
 const Tabs = TabNavigator(
   {

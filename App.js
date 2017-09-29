@@ -1,14 +1,31 @@
 // @flow
 
-import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import React, { PureComponent } from 'react';
+import { StyleSheet, Text, View, Alert, UIManager, AsyncStorage } from 'react-native';
+import { persistStore } from 'redux-persist-immutable';
 import { Provider } from 'react-redux';
 import * as firebase from 'firebase';
 
+// ------------------------------------
+// COMPONENTS
+// ------------------------------------
+// import AppWithNavigationState from './navigators/AppNavigator';
+import AppNavigation from './navigations';
+import Loading from './components/Loading';
+// ------------------------------------
+// UTILS
+// ------------------------------------
 import store from './store';
-import AppWithNavigationState from './navigators/AppNavigator';
+import {
+  persistWhitelist,
+  // subsetOfAppReducer,
+} from './utils/constants';
 
-export default class App extends React.Component {
+class App extends PureComponent<void, {}, State> {
+  state = {
+    isReady: false,
+  };
+  
   componentWillMount() {
     // Initialize Firebase
     const config = {
@@ -30,16 +47,34 @@ export default class App extends React.Component {
       }
       // Do other things
     });
-
+  }
+  
+  componentDidMount() {
+    persistStore(
+      store,
+      {
+        storage: AsyncStorage,
+        whitelist: persistWhitelist,
+        // transforms: [subsetOfAppReducer],
+      },
+      () => {
+        this.setState({ isReady: true });
+      },
+    );
   }
 
   render() {
-
-    return (
-      <Provider store={store}>
-        <AppWithNavigationState />
-      </Provider>
-    );
+    debugger;
+    console.log(<Loading />);
+    if (true) {
+      return <View />;
+    }
+    return <View />;
+    // return (
+    //   <Provider store={store}>
+    //     <AppNavigation />
+    //   </Provider>
+    // );
   }
 }
 
@@ -51,3 +86,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
