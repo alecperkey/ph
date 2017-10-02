@@ -21,6 +21,10 @@ import {
   // subsetOfAppReducer,
 } from './utils/constants';
 
+type State = {
+  isReady: boolean,
+};
+
 class App extends PureComponent<void, {}, State> {
   state = {
     isReady: false,

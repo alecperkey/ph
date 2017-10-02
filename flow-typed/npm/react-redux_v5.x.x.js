@@ -1,6 +1,5 @@
 // flow-typed signature: 141aac29dc4d0e005e25c54bf28e1a8b
 // flow-typed version: 83053e4020/react-redux_v5.x.x/flow_>=v0.30.x <=v0.52.x
-
 import type { Dispatch, Store } from "redux";
 
 declare module "react-redux" {
