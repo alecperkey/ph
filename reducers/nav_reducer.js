@@ -24,9 +24,9 @@ export default function nav(state = initialNavState, action) {
         state
       );
       break;
-    case 'Profile':
+    case 'Settings':
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'Profile' }),
+        NavigationActions.navigate({ routeName: 'Settings' }),
         state
       );
       break;

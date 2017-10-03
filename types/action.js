@@ -10,6 +10,19 @@ type LoginAction = {
 };
 
 // ------------------------------------
+// Auth Actions
+// ------------------------------------
+type FacebookLoginSuccess = {
+  type: 'auth/FACEBOOK_LOGIN_SUCCESS',
+};
+type FacebookLoginFail = {
+  type: 'auth/FACEBOOK_LOGIN_FAIL',
+};
+type FacebookLogout = {
+  type: 'auth/FACEBOOK_LOGOUT',
+};
+
+// ------------------------------------
 // App Actions
 // ------------------------------------
 type ToggleThemeAction = {
@@ -31,5 +44,8 @@ type ToggleSearchBarAction = {
 export type Action =
   | LoginAction
   | ToggleThemeAction
-  | ToggleSearchBarAction;
+  | ToggleSearchBarAction
+  | FacebookLoginSuccess
+  | FacebookLoginFail
+  | FacebookLogout;
   // | AddNewHoldingAction;

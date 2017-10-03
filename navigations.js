@@ -19,6 +19,7 @@ import type {
   NavigationState,
   ThemeColorsData,
   Navigation,
+  AuthState
 } from './types';
 // ------------------------------------
 // SCREENS
@@ -233,7 +234,7 @@ const AppMainNav = StackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Tabs',
+    // initialRouteName: 'Tabs',
     cardStyle: {
       backgroundColor: '#161C36',
       // backgroundColor: 'transparent',
@@ -249,6 +250,7 @@ type Props = {
   dispatch: Function,
   theme: ThemeColorsData,
   darkTheme: boolean,
+  auth: AuthState
 };
 
 class AppNavigator extends Component<void, Props, void> {
@@ -270,8 +272,7 @@ class AppNavigator extends Component<void, Props, void> {
       dispatch: this.props.dispatch,
       state: this.props.nav,
     });
-    // if (!this.props.user.isAuthenticated) {
-    if (true) {
+    if (!this.props.auth.isLoggedIn) {
       return <LoginScreen />;
     }
     return (
@@ -285,6 +286,7 @@ class AppNavigator extends Component<void, Props, void> {
 
 export default connect((state: State) => ({
   nav: state.get('nav'),
+  auth: state.get('auth'),
   theme: state.get('app').theme,
   darkTheme: state.get('app').darkTheme,
 }))(AppNavigator);

@@ -36,7 +36,7 @@ MainScreen.navigationOptions = {
 };
 
 const mapStateToProps = state => ({
-  token: state.auth.token,
-  isLoggedIn: state.auth.isLoggedIn
+  token: state.get('auth').token,
+  isLoggedIn: state.get('auth').isLoggedIn
 });
 export default connect(mapStateToProps, actions)(MainScreen);

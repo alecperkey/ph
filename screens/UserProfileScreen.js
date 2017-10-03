@@ -34,8 +34,8 @@ class UserProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn,
-  token: state.auth.token
+  isLoggedIn: state.get('auth').isLoggedIn,
+  token: state.get('auth').token
 });
 
 export default connect(mapStateToProps, actions)(UserProfileScreen);

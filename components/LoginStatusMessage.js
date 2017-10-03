@@ -23,7 +23,7 @@ const LoginStatusMessage = ({ isLoggedIn, dispatch }) => {
       </Text>
       <Button
         onPress={() =>
-          dispatch(NavigationActions.navigate({ routeName: 'Profile' }))}
+          dispatch(NavigationActions.navigate({ routeName: 'Settings' }))}
         title="View Your Profile"
       />
     </View>
@@ -36,7 +36,7 @@ LoginStatusMessage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn,
+  isLoggedIn: state.get('auth').isLoggedIn,
 });
 
 export default connect(mapStateToProps)(LoginStatusMessage);

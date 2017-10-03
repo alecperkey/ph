@@ -68,17 +68,16 @@ class App extends PureComponent<void, {}, State> {
   }
 
   render() {
-    debugger;
-    console.log(<Loading />);
-    if (true) {
+    console.log(`rendering App: ${this.state.isReady ? 'ready!' : 'waiting...'}`);
+    if (!this.state.isReady) {
       return <View />;
     }
-    return <View />;
-    // return (
-    //   <Provider store={store}>
-    //     <AppNavigation />
-    //   </Provider>
-    // );
+    // return <View />;
+    return (
+      <Provider store={store}>
+        <AppNavigation />
+      </Provider>
+    );
   }
 }
 

@@ -20,3 +20,8 @@ export type AppState = Record<{
 //   entities: Map<string, HoldingData>,
 //   transactionId: number,
 // }>;
+
+export type AuthState = Record<{
+  token: string,
+  isLoggedIn: boolean,
+}>;

@@ -91,9 +91,9 @@ LoginScreen.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  token: state.auth.token,
-  isLoggedIn: state.auth.isLoggedIn
+  auth: state.get('auth'),
+  token: state.get('auth').token,
+  isLoggedIn: state.get('auth').isLoggedIn
 });
 
 // const mapDispatchToProps = dispatch => ({

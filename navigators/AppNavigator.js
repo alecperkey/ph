@@ -29,7 +29,7 @@ AppWithNavigationState.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  nav: state.nav,
+  nav: state.get('nav'),
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

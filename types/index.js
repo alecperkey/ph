@@ -12,6 +12,7 @@ import type { Action } from './action';
 
 import type { 
   AppState, 
+  AuthState
   // CryptosState 
 } from './state';
 
@@ -25,6 +26,7 @@ export type Navigation = NavigationScreenProp<
 export type State = Record<{
   nav: NavigationState,
   app: AppState,
+  auth: AuthState
   // cryptos: CryptosState,
 }>;
 
@@ -38,6 +40,7 @@ export type {
   NavigationAction,
   Action,
   AppState,
+  AuthState
   // CryptosState,
 };
 
