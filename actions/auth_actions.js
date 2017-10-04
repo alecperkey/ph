@@ -2,11 +2,11 @@ import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
 import * as firebase from 'firebase';
 
-import {
-  FACEBOOK_LOGIN_SUCCESS,
-  FACEBOOK_LOGIN_FAIL,
-  FACEBOOK_LOGOUT
-} from './types';
+// import {
+//   FACEBOOK_LOGIN_SUCCESS,
+//   FACEBOOK_LOGIN_FAIL,
+//   FACEBOOK_LOGOUT
+// } from './types';
 
 // How to use AsyncStorage:
 // AsyncStorage.setItem('fb_token', token);
@@ -19,7 +19,7 @@ export const facebookLogout = () => async dispatch => {
     console.log('ERR: token not removed', token);
   } else {
     // Dispatch an action to clear token from redux state also
-    dispatch({ type: FACEBOOK_LOGOUT, payload: null});
+    dispatch({ type: 'auth/FACEBOOK_LOGOUT', payload: null});
   }
 };
 
@@ -28,7 +28,7 @@ export const facebookLogin = () => async dispatch => {
 
   if (token) {
     // Dispatch an action saying FB login is done
-    dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+    dispatch({ type: 'auth/FACEBOOK_LOGIN_SUCCESS', payload: token });
   } else {
     // Start up FB Login process
     doFacebookLoginWithFirebase(dispatch);
@@ -41,11 +41,11 @@ const doFacebookLogin = async dispatch => {
   });
 
   if (type === 'cancel') {
-    return dispatch({ type: FACEBOOK_LOGIN_FAIL });
+    return dispatch({ type: 'auth/FACEBOOK_LOGIN_FAIL' });
   }
 
   await AsyncStorage.setItem('fb_token', token);
-  dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+  dispatch({ type: 'auth/FACEBOOK_LOGIN_SUCCESS', payload: token });
 };
 
 const doFacebookLoginWithFirebase = async dispatch => {
@@ -67,10 +67,10 @@ const doFacebookLoginWithFirebase = async dispatch => {
   }
   if (type === 'cancel') {
     console.log('doFacebookLoginWithFirebase type cancel');
-    return dispatch({ type: FACEBOOK_LOGIN_FAIL });
+    return dispatch({ type: 'auth/FACEBOOK_LOGIN_FAIL' });
   }
 
   await AsyncStorage.setItem('fb_token', token);
-  console.log('dispatch FACEBOOK_LOGIN_SUCCESS, token: ', token);
-  dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+  console.log('dispatch auth/FACEBOOK_LOGIN_SUCCESS, token: ', token);
+  dispatch({ type: 'auth/FACEBOOK_LOGIN_SUCCESS', payload: token });
 };

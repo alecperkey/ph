@@ -175,7 +175,7 @@ type NavProps = {
 
 const Tabs = TabNavigator(
   {
-    Home: {
+    Main: {
       screen: MainScreen,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor, focused }) => (
@@ -197,6 +197,20 @@ const Tabs = TabNavigator(
             <SimpleLineIcons
               color={tintColor}
               name="settings"
+              size={TAB_ICON_SIZE}
+            />
+          </HighLightTab>
+        ),
+      }),
+    },
+    Login: {
+      screen: LoginScreen,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor, focused }) => (
+          <HighLightTab focused={focused}>
+            <SimpleLineIcons
+              color={tintColor}
+              name="login"
               size={TAB_ICON_SIZE}
             />
           </HighLightTab>

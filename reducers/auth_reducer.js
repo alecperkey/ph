@@ -2,21 +2,13 @@ import { Record, Map } from 'immutable';
 
 import type { AuthState, Action } from '../types';
 
-// import {
-//   FACEBOOK_LOGIN_SUCCESS,
-//   FACEBOOK_LOGIN_FAIL,
-//   FACEBOOK_LOGOUT
-// } from '../actions/types';
-
+// initial state
 const AuthRecord = Record({
   token: null,
   isLoggedIn: false
 });
 
-// const initialState = {
-//   token: "null",
-//   isLoggedIn: "null"
-// };
+
 
 export default function authReducer(
   state: AuthState = new AuthRecord(), 
